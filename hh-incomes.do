@@ -17,10 +17,7 @@ clear all
 version 15.1
 
 /*====================================================================
-                        1: Incomes 
-====================================================================*/
-/*====================================================================
-                        1: Primary income
+                        1: Incomes, primary income
 ====================================================================*/
 *---------------------------------1.1: Incomes from production
 *-------------------------1.1.1: Employment incomes
@@ -46,7 +43,7 @@ replace wages = s5p19a / 6 if (s5p19b == 7)
 replace wages = s5p19a / 12 if (s5p19b == 8)
 
 **Commissions, overtime, tips
-gen comissions = s5p20b
+gen commissions = s5p20b
 
 **Thirteenth salary and paid leave
 replace s5p21b = . if ((s5p21b == 9999998) | (s5p21b == 9999999))
@@ -86,8 +83,8 @@ replace wages2 = s5p35a / 3 if (s5p35b == 6)
 replace wages2 = s5p35a / 6 if (s5p35b == 7)
 replace wages2= s5p35a / 12 if (s5p35b == 8)
 
-**Comissions, overtime, tips
-gen comissions2 = s5p36b
+**Commissions, overtime, tips
+gen commissions2 = s5p36b
 
 **Thirtheenth salary and paid leave
 gen holidays2 = s5p37b / s5p37c
@@ -105,8 +102,8 @@ gen transport2 = s5p40b
 gen clothing2 = (s5p41b * s5p41c) / 12
 
 **Wages and salaries second job
-egen    i_wage2 = rsum (wages2 comissions2 holidays2 meals2 housing2 transport2 clothing2)
-replace i_wage2 = . if ((wages2 == .) & (comissions2 == .) & (holidays2 == .) ///
+egen    i_wage2 = rsum (wages2 commissions2 holidays2 meals2 housing2 transport2 clothing2)
+replace i_wage2 = . if ((wages2 == .) & (commissions2 == .) & (holidays2 == .) ///
     & (meals2 == .) & (housing2 == .) & (transport2 == .) & (clothing2 == .))
 
 *------------------1.1.1.3: Incomes from other job in the last 12 months
