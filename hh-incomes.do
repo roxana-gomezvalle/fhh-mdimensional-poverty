@@ -122,9 +122,9 @@ replace wages3 = s5p50a / 3 if (s5p50b == 5)
 replace wages3 = s5p50a / 6 if (s5p50b == 6)
 replace wages3 = s5p50a / 12 if (s5p50b == 7)
 
-**Comissions, overtime, tips
+**Commissions, overtime, tips
 replace s5p51b = . if ((s5p51b == 999998) | (s5p51b == 999999))
-gen comissions3 = s5p51b 
+gen commissions3 = s5p51b 
 
 **Thirtheenth salary and paid leave
 replace s5p52b = . if ((s5p52b == 999998) | (s5p52b == 999999))
@@ -135,8 +135,8 @@ replace s5p53b = . if (s5p53b == 999999)
 gen other3 = s5p53b
 
 **Wages and salaries last 12 months
-egen    i_wage3 = rsum (wages3 comissions3 holidays3 other3)
-replace i_wage3 = . if ((wages3 == .) & (comissions3 == .) & (holidays3 == .) ///
+egen    i_wage3 = rsum (wages3 commissions3 holidays3 other3)
+replace i_wage3 = . if ((wages3 == .) & (commissions3 == .) & (holidays3 == .) ///
     & (other3 == .)) 
 
 *------------------1.1.1.4: Other job in the last 12 months
