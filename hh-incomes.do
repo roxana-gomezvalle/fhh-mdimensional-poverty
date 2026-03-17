@@ -195,7 +195,7 @@ egen    i_sesum = rsum(i_se i_se2 i_se3)
 replace i_sesum = . if ((i_se == .) & (i_se2 == .) & (i_se3 == .))
 lab var i_sesum "Total incomes from independent employment"
 
-*----------------------1.1.1.1: Total employment incomes
+*----------------------1.1.3: Total employment incomes
 egen    i_employment = rsum (i_sesum i_wagesum)
 replace i_employment = . if ((i_sesum == .) & (i_wagesum == .))
 lab var i_employment "Total employment incomes: wages and independent"
