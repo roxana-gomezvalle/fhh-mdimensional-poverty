@@ -210,7 +210,7 @@ keep if (hh_tag == 1)
 keep i00 i06 dominio4 peso2 peso3 hh_employment
 preserve
 
-*-------------------------1.1.2: Imputed rent
+*-------------------------1.1.4: Imputed rent
 use "${pjdatabase}/emnv14_02_datos_de_la_vivienda_y_el_hogar.dta", clear
 replace s1p14a = . if (s1p14a >= 99998)
 replace s1p14b = . if (s1p14b == 99998)
@@ -227,7 +227,7 @@ restore
 merge m:1 i00 using "${pjdatabase}/emnv14-hh-imputed-rent.dta", gen (_merge)
 drop _merge
 
-*-------------------------1.1.3: Total incomes from production
+*-------------------------1.1.5: Total incomes from production
 note: Inputed rent is not added here. Income will be adjusted with the inputed rent at a later stage
 
 gen     hh_prod = hh_employment
