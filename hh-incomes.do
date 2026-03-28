@@ -365,7 +365,7 @@ merge 1:m i00 using "${pjdatabase}/emnv14-hh-school-supplies.dta", gen (_merge)
 drop _merge
 preserve
 
-*---------------2.2.3: Scolarships
+*---------------2.2.3: Scholarships
 use "${pjdatabase}/emnv14_15_parte_c3_de_la_seccion_7.dta", clear
 numlabel, add
 
