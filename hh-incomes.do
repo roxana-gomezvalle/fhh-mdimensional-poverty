@@ -486,9 +486,9 @@ lab var       hh_other "Other incomes"
 egen     hh_tag = tag(i00)
 keep if (hh_tag == 1)
 keep i00 hh_other
-save "${pjdatabase}/emnv14-hh-other-transfers.dta", replace
+save "${pjdatabase}/emnv14-hh-other-transfers2.dta", replace
 restore
-merge 1:m i00 using "${pjdatabase}/emnv14-hh-other-transfers.dta", gen (_merge)
+merge 1:m i00 using "${pjdatabase}/emnv14-hh-other-transfers2.dta", gen (_merge)
 drop _merge
 
 *------------------3.4: Total other incomes
@@ -500,8 +500,8 @@ lab var hh_otherinc "Other incomes"
 /*====================================================================
                         4: Total household incomes
 ====================================================================*/
-egen    hh_incomes = rsum(hh_otherinc hh_transfer hh_primary)
-replace hh_incomes = . if ((hh_otherinc == .) & (hh_transfer == .) ///
+egen    hh_incomes = rsum(hh_otherinc hh_transfers hh_primary)
+replace hh_incomes = . if ((hh_otherinc == .) & (hh_transfers == .) ///
     & (hh_primary == .))
 lab var hh_incomes "Total monthly household incomes"
 preserve
