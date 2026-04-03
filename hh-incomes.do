@@ -548,19 +548,19 @@ lab var hh_avincomes "Monthly household available incomes"
 replace hh_avincomes = 0 if (hh_avincomes < 0) 
 
 /*====================================================================
-                        7: Adjusting inputed rent
+                        7: Adjusting imputed rent
 ====================================================================*/
 gen aux_rent = hh_rent / hh_avincomes
 replace hh_rent = 0 if (hh_avincomes == 0)
 replace hh_rent = hh_avincomes if (hh_rent > hh_avincomes)
 
 egen    hh_m_income = rsum(hh_rent hh_avincomes)
-lab var hh_m_income "Total househol monthly available incomes with inputed rent"
+lab var hh_m_income "Total househol monthly available incomes with imputed rent"
 preserve
 /*====================================================================
                         8: Income per capita
 ====================================================================*/
-*--------------------8.1: HH per capita income
+#Number of household members
 use "${pjdatabase}/emnv14_04_poblacion", clear
 rename *, lower
 numlabel, add
@@ -576,7 +576,7 @@ restore
 merge 1:m i00 using "${pjdatabase}/emnv14-hh-members.dta", gen (_merge)
 drop _merge
 
-*--------------------8.2: HH per capita income
+#Household income per capita
 gen     hh_m_pcincome = hh_m_income / hh_members
 lab var hh_m_pcincome "HH monthly total per capita income"
 
