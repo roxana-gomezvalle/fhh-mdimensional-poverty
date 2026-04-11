@@ -354,7 +354,7 @@ foreach indicator of local indicators {
 *--------------------6.3: Counting vector
 egen cvec = rowtotal(w_hh_d_materials w_hh_d_overcrowding w_hh_d_tenure      ///
     w_hh_d_water w_hh_d_sanitation w_hh_d_energy w_hh_d_income w_hh_d_assets ///
-	w_hh_d_attendance w_hh_d_schoolgap w_hh_d_adultschool w_hh_d_emp w_hh_d_sp)
+	w_hh_d_attendance w_hh_d_schoolgap w_hh_d_adultschooling w_hh_d_emp w_hh_d_sp)
 lab var cvec "Counting vector"
 
 forvalue k = 10(1)100 {
