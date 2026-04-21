@@ -9,8 +9,8 @@ Output       : Household incomes - Based on CEPAL (2018)
 /*====================================================================
                         0: Program set up
 ====================================================================*/
-global pjdatabase "C:\Users\User\Documents\MPI - FHH\Database"
-global dofiles   "C:\Users\User\Documents\MPI - FHH\Do-files"
+global pjdatabase "C:\Users\User\OneDrive\MPI - FHH\Database"
+global dofiles   "C:\Users\User\OneDrive\MPI - FHH\Do-files"
 
 set more off , perm
 clear all
@@ -65,8 +65,8 @@ replace s5p25b = . if (s5p25b == 999999)
 gen clothing = (s5p25b * s5p25c) / 12
 
 **Total wages and salaries first job
-egen    i_wage = rsum (wages comissions holidays meals housing transport clothing)
-replace i_wage = . if ((wages == .) & (comissions == .) & (holidays == .) ///
+egen    i_wage = rsum (wages commissions holidays meals housing transport clothing)
+replace i_wage = . if ((wages == .) & (commissions == .) & (holidays == .) ///
     & (meals == .) & (housing == .) & (transport == .) & (clothing == .))
 
 *------------------1.1.1.2: Second job incomes
