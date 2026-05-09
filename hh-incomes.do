@@ -479,21 +479,21 @@ egen    aux_other = rsum (s7p37a s7p37b)
 replace aux_other = . if ((s7p37a == .) & (s7p37b == .))
 gen i_other = aux_other / 12
 
-bys i00: egen hh_other = sum(i_other)
-replace       hh_other = . if (hh_other == 0)
-lab var       hh_other "Other incomes"
+bys i00: egen hh_other2 = sum(i_other)
+replace       hh_other2 = . if (hh_other2 == 0)
+lab var       hh_other2 "Other incomes"
 
 egen     hh_tag = tag(i00)
 keep if (hh_tag == 1)
-keep i00 hh_other
+keep i00 hh_other2
 save "${pjdatabase}/emnv14-hh-other-transfers2.dta", replace
 restore
 merge 1:m i00 using "${pjdatabase}/emnv14-hh-other-transfers2.dta", gen (_merge)
 drop _merge
 
 *------------------3.4: Total other incomes
-egen    hh_otherinc = rsum (hh_remittances hh_other hh_inheritance)
-replace hh_otherinc = . if ((hh_remittances == .) & (hh_other == .) ///
+egen    hh_otherinc = rsum (hh_remittances hh_other2 hh_inheritance)
+replace hh_otherinc = . if ((hh_remittances == .) & (hh_other2 == .) ///
     & (hh_inheritance == .))
 lab var hh_otherinc "Other incomes"
 
