@@ -9,8 +9,8 @@ Output:        MPI-LA based on Santos et al. (2015)
 /*====================================================================
                         0: Program set up
 ====================================================================*/
-global pjdatabase "C:\Users\User\Documents\MPI - FHH\Database"
-global dofiles   "C:\Users\User\Documents\MPI - FHH\Do-files"
+global pjdatabase "C:\Users\User\OneDrive\MPI - FHH\Database"
+global dofiles   "C:\Users\User\OneDrive\MPI - FHH\Do-files"
 
 set more off , perm
 clear all
@@ -43,7 +43,7 @@ lab var d_wall "Wall materials"
 egen    hh_d_materials = anymatch(d_wall d_floor d_roof), v(1)
 lab var hh_d_materials "Housing materials"
 gen     aux_miss = ((d_wall == .) & (d_floor == .) & (d_roof == .))
-replace hh_d_materials = . if !missing(aux_miss) 
+replace hh_d_materials = . if aux_miss == 1 
 preserve
 
 *--------------------1.2: People per room indicator
