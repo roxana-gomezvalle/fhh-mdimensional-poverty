@@ -551,8 +551,8 @@ replace hh_avincomes = 0 if (hh_avincomes < 0)
                         7: Adjusting imputed rent
 ====================================================================*/
 gen aux_rent = hh_rent / hh_avincomes
-replace hh_rent = 0 if (hh_avincomes == 0)
-replace hh_rent = hh_avincomes if (hh_rent > hh_avincomes)
+gen hh_rent2 = hh_rent
+replace hh_rent = hh_avincomes if (aux_rent > 1)
 
 egen    hh_m_income = rsum(hh_rent hh_avincomes)
 lab var hh_m_income "Total househol monthly available incomes with imputed rent"
