@@ -175,7 +175,7 @@ keep if ((s2p2a >= 6) & (s2p2a <= 17)) //Restricting database to children
 recode s4p15 (1 = 0) (else = 1), gen(d_attendance)
 bys i00: egen hh_d_attendance = max(d_attendance)
 lab var       hh_d_attendance "Children's School attendance"
-replace       hh_d_attendance = 0 if !missing(hh_d_attend) 
+replace       hh_d_attendance = 0 if missing(hh_d_attend) 
 tab           hh_d_attendance [aw=peso2]
 
 *--------------------4.2: Schooling gap indicator
