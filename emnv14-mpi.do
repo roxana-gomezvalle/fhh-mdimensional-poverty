@@ -195,7 +195,7 @@ gen d_schoolgap = (gap_grade > 2)
 
 bys i00: egen hh_d_schoolgap = max(d_schoolgap)
 lab var       hh_d_schoolgap "Schooling gap"
-replace       hh_d_schoolgap = 0 if !missing(hh_d_schoolgap) 
+replace       hh_d_schoolgap = 0 if missing(hh_d_schoolgap) 
 tab           hh_d_schoolgap [aw=peso2]
 
 egen     hh_tag = tag(i00) //Keeping relevant variable
@@ -227,7 +227,7 @@ gen     d_adultschooling = (y_schooling < 9) if (s2p2a <= 59) & (i06 == 1)
 //The author makes a distinction between urban and rural areas
 replace d_adultschooling = 1 if ((y_schooling < 6) & (s2p2a >= 60))
 replace d_adultschooling = 1 if ((y_schooling < 6) & (i06 == 2))
-replace d_adultschooling = 0 if !missing(d_adultschool)
+replace d_adultschooling = 0 if missing(d_adultschool)
 
 bys i00: egen hh_d_adultschooling = max(d_adultschool)
 lab var       hh_d_adultschooling "Adult Schooling achievement"
@@ -242,7 +242,7 @@ merge 1:1 i00 using "${pjdatabase}/emnv14-hh-adult-schooling.dta" ///
     , keepusing(hh_d_adultschooling)
 drop _merge
 
-replace hh_d_adultschooling = 0 if !missing(hh_d_adultschooling)
+replace hh_d_adultschooling = 0 if missing(hh_d_adultschooling)
 tab     hh_d_adultschooling [aw=peso2]
 preserve
 
@@ -257,7 +257,7 @@ numlabel, add
 keep if ((s2p2a >= 15) & (s2p2a <= 65)) // Restricting to working age population
 
 gen     d_emp = (s5p1 == 2)
-replace d_emp =0 if ((s5p2 == 1) | (s5p2 == 2) | (s5p2 == 3) | (s5p2 == 4) ///
+replace d_emp = 0 if ((s5p2 == 1) | (s5p2 == 2) | (s5p2 == 3) | (s5p2 == 4) ///
                     | (s5p2 == 5))
 replace d_emp = 0 if ((s5p4 == 1) | (s5p4 == 2) | (s5p4 == 3) | (s5p4 == 4)) 
 replace d_emp = 0 if ((s5p10 == 1) | (s5p10 == 2) | (s5p10 == 3) | (s5p10 == 5) ///
@@ -276,7 +276,7 @@ restore
 merge 1:1 i00 using "${pjdatabase}/emnv14-hh-employment.dta", keepusing(hh_d_emp)
 drop _merge
 
-replace hh_d_emp = 0 if !missing(hh_d_emp) 
+replace hh_d_emp = 0 if missing(hh_d_emp) 
 tab     hh_d_emp [aw=peso2]
 preserve
 
