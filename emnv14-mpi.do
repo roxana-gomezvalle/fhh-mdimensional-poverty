@@ -370,7 +370,7 @@ forvalue k = 10(1)100 {
 }
 
 sum h_*p a_*p m0_*p, sep(10)
-sum h_25p a_25p m0_25p, sep(10)
+sum h_25p a_25p m0_25p
 
 *--------------------6.4: Headcount for multidimensional poor households
 local k = 25
@@ -380,7 +380,7 @@ foreach indicator of local indicators {
     gen     ch_`indicator'_k`k'p = ((cvec >= `k') & (hh_d_`indicator' == 1))
     lab var ch_`indicator'_k`k'p "Censored headcount of dimension `indicator' with k=`k'%"
 }
-sum ch_*_k25p, sep(12)
+sum ch_*_k25p
 
 *--------------------6.5: Contributions per dimension
 local k = 25
@@ -394,8 +394,8 @@ foreach indicator of local indicators {
     gen     rel_cont_`indicator'_k`k'p = (ch_`indicator'_k`k'p * w_`indicator') / (m0_`k'p)
     lab var rel_cont_`indicator'_k`k'p "Relative contribution of dimension `indicator' to M0 with k=`k'%"
 }
-sum abs_cont_*_k25p, sep(12)
-sum rel_cont_*_k25p, sep(12)
+sum abs_cont_*_k25p
+sum rel_cont_*_k25p
 
 /*====================================================================
                         7: Final steps
