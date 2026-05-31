@@ -9,8 +9,8 @@ Output       : Final databse for analysis
 /*====================================================================
                         0: Program set up
 ====================================================================*/
-global pjdatabase "C:\Users\User\Documents\MPI - FHH\Database"
-global dofiles   "C:\Users\User\Documents\MPI - FHH\Do-files"
+global pjdatabase "C:\Users\User\OneDrive\MPI - FHH\Database"
+global dofiles   "C:\Users\User\OneDrive\MPI - FHH\Do-files"
 
 set more off , perm
 clear all
@@ -41,7 +41,8 @@ gen aux_partner = (s2p4 == 2)
 bys i00: egen partner = max(aux_partner)
 replace    self_composition = 2 if (((s2p7 < 3) & (partner == 0)) & (self_fhh == 1))
 replace    self_composition = 3 if (((s2p7 < 3) & (partner == 1)) & (self_fhh == 1))
-replace    self_composition = 4 if ((self_fhh == 0) & (s2p7 > 2))
+replace    self_composition = 4 if ((self_fhh == 0) & (s2p7 > 2) & !missing(s2p7))
+replace    self_composition = . if ((self_fhh == 0) & missing(s2p7))
 lab define self_composition 0 "MHH - Co-resident" 1 "FHH - De jure" 2 "FHH - De facto" ///
     3 "FHH - Co-resident" 4 "MHH - Single", replace
 lab values self_composition self_composition
@@ -67,7 +68,8 @@ bys i00: egen ae = sum(adult_employed)
 clonevar   demographic_composition = demographic
 replace    demographic_composition = 2 if ((s2p7 < 3) & (partner == 0) ///
     & (demographic == 1))
-replace    demographic_composition = 3 if ((demographic ==0) & (s2p7 > 2)) 
+replace    demographic_composition = 3 if ((demographic ==0) & (s2p7 > 2) & !missing(s2p7))
+replace    demographic_composition = . if ((demographic == 0) & missing(s2p7))
 lab define demographic_composition 0 "MHH - Co-resident" 1 "FHH - De jure" ///
     2 "FHH - De facto" 3 "MHH - Single", replace
 lab values demographic_composition demographic_composition
