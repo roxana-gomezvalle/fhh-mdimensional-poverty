@@ -126,6 +126,7 @@ keep i00 dominio4 i06 s2p00 s2p2a s2p2b s2p3 miembro s2p4 s2p5 s2p7 i_employment
 gen share_earner = i_employment / hh_employment
 bys i00: egen main_earner = max(share_earner)
 gen hh_earner = (main_earner == share_earner) & s2p5 == 2 
+replace hh_earner = 0 if main_earner == .
 bys i00: egen fhh_earner = max(hh_earner)
 lab var       fhh_earner "Cash head: Major earner"
 lab define    fhh_earner 1 "Female-head hh" 0 "Male-head hh"
