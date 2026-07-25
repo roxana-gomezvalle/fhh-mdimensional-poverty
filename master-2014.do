@@ -136,6 +136,7 @@ lab values    fhh_earner fhh_earner
 gen share_contributor = i_employment / hh_m_income
 bys i00: egen main_contributor = max(share_contributor)
 gen hh_contributor = (main_contributor==share_contributor) & s2p5 == 2 
+replace hh_contributor = 0 if main_contributor == .
 bys i00: egen fhh_contributor = max(hh_contributor)
 lab var       fhh_contributor "Cash head: Major incomes contributor"
 lab define    fhh_contributor 1 "Female-head hh" 0 "Male-head hh"
